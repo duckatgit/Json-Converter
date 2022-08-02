@@ -1,6 +1,5 @@
 .App {
   background-color: rgb(252, 237, 215);
-  height: 100vh;
   width: 100%;
   text-align: center;
 }
@@ -11,22 +10,31 @@
 
 .container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-evenly;
+  width: 100%;
+}
+
+.converter{
+  display: flex;
   width: 100%;
 }
 
 .html-converter {
   padding: 1em;
   width: 50%;
+  height: 100%;
 }
 
 textarea {
   width: 100%;
-  height: 70%;
+  height: 200px;
 }
 
 .css-converter {
   padding: 1em;
   width: 50%;
+  height: 100%;
 }
+
+.bottom-container{padding: 1em;}
