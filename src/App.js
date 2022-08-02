@@ -9,12 +9,9 @@ function App() {
   const [json, setJson] = useState("");
   const [cssValue, setCssValue] = useState("");
   const [cssJson, setCssJson] = useState("");
+  const [payLoad, setPayLoad] = useState();
 
   const [keyValue, setKeyValue] = useState();
-  const [objectKey, setObjectKey] = useState();
-  const [objectValue, setObjectValue] = useState();
-  const [attributes, setAttributes] = useState("");
-  const [child, setChild] = useState("");
   const nodes = [];
   const style = [];
   const array = [];
@@ -40,26 +37,9 @@ function App() {
       },
     };
     // console.log(JSON.stringify(cssjson));
-    setJson(JSON.stringify(payload));
+    setPayLoad(JSON.stringify(payload));
+    // setJson(JSON.stringify(payload));
   };
-
-  // const onClicHandler = (index) => {
-  //   const styleless = "";
-  //   for (let i = 0; i < keyValue.length; i++) {
-  //     for (let j = 0; j < keyValue[index? index : i].length; j++) {
-  //       const index = ++i;
-  //       // const val = [keyValue[i][j]];
-  //       console.log(keyValue, index, j);
-  //       onClicHandler(index)
-  //       // if (val) {
-  //       //   val.forEach((e) => {
-  //       //     setObjectKey(Object.keys(e));
-  //       //     setObjectValue(Object.values(e));
-  //       //   });
-  //       // }
-  //     }
-  //   }
-  // };
 
   const convertToHtmlNode = (jsonBody) => {
     const classes = [];
@@ -96,7 +76,7 @@ function App() {
       });
     }
     const HtmlToJson = JSON.stringify(nodes);
-    // setJson(HtmlToJson);
+    setJson(HtmlToJson);
   };
 
   const convertToCssNode = (cssjson) => {
@@ -104,7 +84,8 @@ function App() {
 
     if (cssjson && Object.keys(cssjson).length) {
       const keys = cssjson && Object.keys(cssjson?.children);
-      if (array.length > 0) {console.log(array)
+      if (array.length > 0) {
+        console.log(array);
         for (let index = 0; index < array.length; index++) {
           children.push({
             _id: uuid(),
@@ -158,27 +139,33 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Convert HTML & CSS into JSON</h1>
       <div className="container">
-        <div className="html-converter">
-          <h3>Html Convertion</h3>
-          <textarea onChange={(e) => setValue(e.target.value)} />
-          <div>
-            <h2>Result</h2>
+        <h1>Convert HTML & CSS into JSON</h1>
+        <div className="converter">
+          <div className="html-converter">
+            <h3>Html Convertion</h3>
+            <textarea onChange={(e) => setValue(e.target.value)} />
+            <div>
+              <h2>Result</h2>
+            </div>
+            <textarea value={json} />
           </div>
-          <textarea value={json} />
-        </div>
 
-        <div className="css-converter">
-          <h3>CSS Convertion</h3>
-          <textarea onChange={(e) => setCssValue(e.target.value)} />
-          <div>
-            <h2>Result</h2>
+          <div className="css-converter">
+            <h3>CSS Convertion</h3>
+            <textarea onChange={(e) => setCssValue(e.target.value)} />
+            <div>
+              <h2>Result</h2>
+            </div>
+            <textarea value={cssJson} />
           </div>
-          <textarea value={cssJson} />
         </div>
       </div>
-      <button onClick={handleCovert}>Convert HTML & Css</button>
+      <div className="bottom-container">
+        <h1>Final Result</h1>
+        <textarea value={payLoad} />
+        <button onClick={handleCovert}>Convert HTML & Css</button>
+      </div>
     </div>
   );
 }
